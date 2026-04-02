@@ -1,0 +1,5 @@
+ID;NOME;TIPO_CONTA;STATUS_CONTA
+1;Maria Silva;Corrente;ATIVA
+2;João Oliveira;Poupança;ATIVA
+3;Ana Costa;Corrente;ATIVA
+4;Carlos Mendes;Investimento;BLOQUEADA PARA OPERAÇÕES
