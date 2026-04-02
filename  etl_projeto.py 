@@ -1,0 +1,53 @@
+## ALUNA: Idna da Silva Cunha dos Reis
+# PROJETO: ETL COMPLETO - Santander Dev Week
+
+# ETAPA 1: EXTRAÇÃO (Extract)
+print("=== INICIANDO ETAPA DE EXTRAÇÃO ===")
+usuarios = [
+    {
+        "id": 1,
+        "nome": "Maria Silva",
+        "tipo_conta": "Corrente"
+    },
+    {
+        "id": 2,
+        "nome": "João Oliveira",
+        "tipo_conta": "Poupança"
+    },
+    {
+        "id": 3,
+        "nome": "Ana Costa",
+        "tipo_conta": "Corrente"
+    },
+    {
+        "id": 4,
+        "nome": "Carlos Mendes",
+        "tipo_conta": "Investimento"
+    }
+]
+print("✅ Dados extraídos com sucesso:")
+for usuario in usuarios:
+    print(f"- ID {usuario['id']}: {usuario['nome']} | Conta: {usuario['tipo_conta']}")
+print("=== EXTRAÇÃO CONCLUÍDA ===\n")
+
+# ETAPA 2: TRANSFORMAÇÃO (Transform)
+print("=== INICIANDO ETAPA DE TRANSFORMAÇÃO ===")
+usuarios_transformados = []
+for user in usuarios:
+    if user["tipo_conta"] != "Investimento":
+        user["status_conta"] = "ATIVA"
+    else:
+        user["status_conta"] = "BLOQUEADA PARA OPERAÇÕES"
+    usuarios_transformados.append(user)
+    print(f"✅ {user['nome']} - Status atualizado para {user['status_conta']}")
+print("=== TRANSFORMAÇÃO CONCLUÍDA ===\n")
+
+# ETAPA 3: CARREGAMENTO (Load)
+print("=== INICIANDO ETAPA DE CARREGAMENTO ===")
+with open("usuarios_etl_final.txt", "w", encoding="utf-8") as arquivo_final:
+    arquivo_final.write("ID;NOME;TIPO_CONTA;STATUS_CONTA\n")
+    for user in usuarios_transformados:
+        linha = f"{user['id']};{user['nome']};{user['tipo_conta']};{user['status_conta']}\n"
+        arquivo_final.write(linha)
+print("📂 Arquivo usuarios_etl_final.txt criado com sucesso!")
+print("=== ETL COMPLETO ===")
